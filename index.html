@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>百万字长文本渲染方案对比</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="row row-schemes">
+      <span class="label">渲染方案</span>
+      <div id="schemeTabs" class="tabs">
+        <button data-scheme="full">整段渲染</button>
+        <button data-scheme="paged">分页渲染</button>
+        <button data-scheme="virtual" class="active">虚拟滚动</button>
+        <button data-scheme="canvas">Canvas 绘制</button>
+      </div>
+      <span id="textInfo" class="dim"></span>
+    </div>
+
+    <div class="row row-search">
+      <input id="searchInput" type="search" placeholder="搜索文本（区分大小写，Worker 内执行）…" autocomplete="off">
+      <button id="prevMatch" title="上一处">↑</button>
+      <button id="nextMatch" title="下一处">↓</button>
+      <span id="searchInfo" class="dim"></span>
+    </div>
+
+    <div class="row row-metrics" id="metricsPanel">
+      <span class="metric">渲染耗时 <b id="mRender">—</b></span>
+      <span class="metric">FPS <b id="mFps">—</b></span>
+      <span class="metric">JS 堆内存 <b id="mMem">—</b></span>
+      <span class="metric">DOM 节点 <b id="mDom">—</b></span>
+      <span class="metric">长任务(&gt;50ms) <b id="mLongtask">0</b></span>
+      <label class="metric">采样间隔
+        <select id="sampleRate">
+          <option value="250">250ms</option>
+          <option value="500" selected>500ms</option>
+          <option value="1000">1000ms</option>
+          <option value="2000">2000ms</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main id="viewport"></main>
+
+  <div id="statusBar" class="dim">就绪</div>
+
+  <script src="js/util.js"></script>
+  <script src="js/text-source.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/renderers/full.js"></script>
+  <script src="js/renderers/paged.js"></script>
+  <script src="js/renderers/virtual.js"></script>
+  <script src="js/renderers/canvas.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

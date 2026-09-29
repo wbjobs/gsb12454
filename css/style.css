@@ -1,0 +1,131 @@
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font: 14px/1.5 "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  color: #e6e6e6;
+  background: #1b1d23;
+  display: flex;
+  flex-direction: column;
+}
+
+#topbar {
+  padding: 8px 12px;
+  background: #24262e;
+  border-bottom: 1px solid #34363f;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.label { color: #9aa0ae; font-size: 13px; }
+.dim { color: #8b90a0; font-size: 12px; }
+
+.tabs { display: flex; gap: 6px; }
+.tabs button {
+  background: #30333d;
+  color: #cfd3dd;
+  border: 1px solid #3d404c;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+}
+.tabs button:hover { background: #3a3d49; }
+.tabs button.active { background: #3b6fd4; border-color: #3b6fd4; color: #fff; }
+.tabs button:disabled { opacity: .5; cursor: wait; }
+
+#searchInput {
+  width: 320px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #3d404c;
+  background: #17181d;
+  color: #e6e6e6;
+  outline: none;
+}
+#searchInput:focus { border-color: #3b6fd4; }
+
+.row-search button {
+  background: #30333d;
+  color: #cfd3dd;
+  border: 1px solid #3d404c;
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.row-search button:hover { background: #3a3d49; }
+
+.row-metrics { font-size: 12px; color: #9aa0ae; gap: 16px; }
+.metric b { color: #7fd08a; font-weight: 600; margin-left: 4px; }
+.metric select {
+  background: #17181d;
+  color: #cfd3dd;
+  border: 1px solid #3d404c;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+#viewport {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background: #15161b;
+}
+
+#statusBar {
+  padding: 4px 12px;
+  background: #24262e;
+  border-top: 1px solid #34363f;
+  font-size: 12px;
+}
+
+/* ---- 通用行样式（DOM 方案） ---- */
+.line {
+  height: 26px;
+  line-height: 26px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+.line .ln { color: #5c6274; user-select: none; }
+.line mark { background: #b98a1d; color: #101010; border-radius: 2px; padding: 0 1px; }
+.line mark.current { background: #ff5f56; color: #fff; }
+
+/* ---- 整段渲染 ---- */
+.full-scroller { height: 100%; overflow: auto; }
+.render-progress {
+  position: sticky; top: 0; z-index: 2;
+  background: #2b2e38; color: #ffb454;
+  padding: 4px 10px; font-size: 12px;
+}
+
+/* ---- 分页渲染 ---- */
+.paged-wrap { height: 100%; display: flex; flex-direction: column; }
+.paged-toolbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px; background: #20222a; border-bottom: 1px solid #34363f;
+  font-size: 13px; flex: none;
+}
+.paged-toolbar button {
+  background: #30333d; color: #cfd3dd; border: 1px solid #3d404c;
+  border-radius: 5px; padding: 3px 10px; cursor: pointer;
+}
+.paged-toolbar input {
+  width: 64px; padding: 3px 6px; border-radius: 4px;
+  border: 1px solid #3d404c; background: #17181d; color: #e6e6e6;
+}
+.paged-body { flex: 1; overflow: auto; }
+
+/* ---- 虚拟滚动 ---- */
+.vs-scroller { height: 100%; overflow: auto; position: relative; }
+.vs-spacer { position: relative; }
+.vs-window { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+
+/* ---- Canvas ---- */
+.cv-scroller { height: 100%; overflow: auto; position: relative; }
+.cv-spacer { position: relative; }
+.cv-canvas { position: sticky; top: 0; display: block; width: 100%; }
